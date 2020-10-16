@@ -1,8 +1,10 @@
 package com.suncode.kedaiasik;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,15 +43,28 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_signout:
-                //signout firebase
-                mAuth.signOut();
-
-                //intent to new
-                startActivity(new Intent(this, SigninActivity.class));
-                finish();
-
+                //open dialog signout
+                dialogSignOut();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dialogSignOut() {
+        AlertDialog.Builder builder = dialogBuilder(getString(R.string.signout_dialog_title), getString(R.string.signout_dialog_message));
+        builder.setPositiveButton(getString(R.string.signout), (dialog, which) -> {
+            //signout firebase
+            mAuth.signOut();
+
+            //intent to new
+            startActivity(new Intent(this, SigninActivity.class));
+            finish();
+        });
+        builder.setNegativeButton(getString(R.string.cancle), (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

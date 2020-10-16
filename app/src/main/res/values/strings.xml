@@ -3,6 +3,7 @@
     <string name="signin">Masuk Kedai Asik</string>
     <string name="signup">Daftar Kedai Asik</string>
     <string name="signout">Keluar</string>
+    <string name="cancle">Batal</string>
 
     <string name="name">Nama Lengkap</string>
     <string name="phone">Nomor Ponsel</string>
@@ -24,4 +25,7 @@
     <string name="err_wrong_email">Email tidak terdaftar</string>
 
     <string name="user_created">Berhasil mendaftarkan Akun</string>
+
+    <string name="signout_dialog_title">Keluar?</string>
+    <string name="signout_dialog_message">Akun anda akan dikeluarkan dari aplikasi</string>
 </resources>
