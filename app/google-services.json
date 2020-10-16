@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "343554976718",
+    "firebase_url": "https://kedai-asik.firebaseio.com",
+    "project_id": "kedai-asik",
+    "storage_bucket": "kedai-asik.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343554976718:android:4ff7470ca37cf8a33f999f",
+        "android_client_info": {
+          "package_name": "com.suncode.kedaiasik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343554976718-ksfc94oi63l7hdk5fl0gqq4r2cgtl8dp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.suncode.kedaiasik",
+            "certificate_hash": "b6e444374b9a63bf219e1ace4e1e69fce855adc1"
+          }
+        },
+        {
+          "client_id": "343554976718-ndccrpq2fjnfju8r3l45n1k0be6qp8am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjOGZuCIsRVeCpgNwtamF5Ljr77vRb6H8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343554976718-ndccrpq2fjnfju8r3l45n1k0be6qp8am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

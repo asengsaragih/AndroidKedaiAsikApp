@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Kedai Asik</string>
+    <string name="signin">Masuk Kedai Asik</string>
+    <string name="signup">Daftar Kedai Asik</string>
+    <string name="signout">Keluar</string>
+
+    <string name="name">Nama Lengkap</string>
+    <string name="phone">Nomor Ponsel</string>
+    <string name="email">Alamat Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="repassword">Ulangi Kata Sandi</string>
+
+    <string name="intent_singin_from_signup">Sudah punya akun? Masuk sekarang</string>
+    <string name="intent_singup_from_signin">Belum punya akun? Daftar sekarang</string>
+    <string name="signup_btn">Daftar</string>
+    <string name="signin_btn">Masuk</string>
+
+    <string name="err_empty_form">Form harus di isi</string>
+    <string name="err_pass_not_equals">Kata sandi tidak sama</string>
+    <string name="err_bad_email">Format email salah</string>
+    <string name="err_email_used">Email sudah digunakan orang lain</string>
+    <string name="err_pass_length">Kata sandi minimal 6 karakter</string>
+    <string name="err_wrong_pass">Password salah</string>
+    <string name="err_wrong_email">Email tidak terdaftar</string>
+
+    <string name="user_created">Berhasil mendaftarkan Akun</string>
 </resources>
