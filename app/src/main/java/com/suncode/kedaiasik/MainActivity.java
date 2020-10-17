@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,18 +20,85 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.suncode.kedaiasik.adapter.StoreAdapter;
 import com.suncode.kedaiasik.base.BaseActivity;
 import com.suncode.kedaiasik.base.Constant;
+import com.suncode.kedaiasik.model.Store;
 import com.suncode.kedaiasik.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivityTAG";
 
+    private RecyclerView mMainRecycleview;
+    private List<Store> mData;
+    private List<String> mDataId;
+    private StoreAdapter mAdapter;
+
+    private ChildEventListener childEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            mData.add(snapshot.getValue(Store.class));
+            mDataId.add(snapshot.getKey());
+            mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            int pos = mDataId.indexOf(snapshot.getKey());
+            mData.set(pos, snapshot.getValue(Store.class));
+            mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            int pos = mDataId.indexOf(snapshot.getKey());
+            mDataId.remove(pos);
+            mData.remove(pos);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //list initialize
+        mData = new ArrayList<>();
+        mDataId = new ArrayList<>();
+
+        //recycle view initalize
+        mMainRecycleview = findViewById(R.id.recycle_main);
+        mMainRecycleview.setLayoutManager(layoutManager);
+        mMainRecycleview.addItemDecoration(itemDecoration);
+
+        //set data
+        setData();
+    }
+
+    private void setData() {
+        DatabaseReference reference = mDatabase.getReference().child(Constant.STORE);
+        reference.addChildEventListener(childEventListener);
+
+        mAdapter = new StoreAdapter(this, mData, mDataId, (id, store) -> {
+
+        });
+
+        mMainRecycleview.setAdapter(mAdapter);
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.suncode.kedaiasik.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
-import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 @IgnoreExtraProperties
-public class Menu {
+public class Menu implements Serializable {
     private String name;
     private double price;
     private String image;

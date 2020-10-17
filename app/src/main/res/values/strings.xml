@@ -34,4 +34,16 @@
     <string name="store_name">Nama Kedai</string>
     <string name="opening_store">Jam Buka</string>
     <string name="closing_store">Jam Tutup</string>
+    <string name="empty_view">Data Kosong</string>
+
+    <string name="food">Makanan</string>
+    <string name="drink">Minuman</string>
+
+    <string name="menu_activity">Tambah Menu</string>
+    <string name="menu_name">Nama Menu</string>
+    <string name="menu_price">Harga Menu</string>
+    <string name="menu_category">Kategori Menu</string>
+    <string name="menu_image">Gambar Menu</string>
+    <string name="save">Save Menu</string>
+    <string name="delete">Delete menu</string>
 </resources>

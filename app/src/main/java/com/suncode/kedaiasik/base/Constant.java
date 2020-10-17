@@ -10,6 +10,18 @@ public class Constant {
 
     public static final String USER = "User";
     public static final String STORE = "Store";
+    public static final String MENU = "Menu";
     public static final String STORE_ID = "storeID";
     public static final String INTENT_TO_STORE = "intent_store_id_to_store_activity";
+    public static final String INTENT_TO_FORM_MENU = "intent_store_id_to_form_menu";
+
+    //kategori makanan dan minuman
+    public static final int MENU_CATEGORY_FOOD = 1;
+    public static final int MENU_CATEGORY_DRINK = 2;
+
+    //reques code permission
+    public static final int REQUEST_PERMISSION_WRITE_STORAGE = 2;
+    public static final int REQUEST_PERMISSION_READ_STORAGE = 3;
+
+    public static final int REQUEST_PICK_IMAGE = 18;
 }
