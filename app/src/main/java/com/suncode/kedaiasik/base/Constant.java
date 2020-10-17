@@ -10,4 +10,6 @@ public class Constant {
 
     public static final String USER = "User";
     public static final String STORE = "Store";
+    public static final String STORE_ID = "storeID";
+    public static final String INTENT_TO_STORE = "intent_store_id_to_store_activity";
 }

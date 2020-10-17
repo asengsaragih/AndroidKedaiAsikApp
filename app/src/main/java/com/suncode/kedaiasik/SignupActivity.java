@@ -135,11 +135,6 @@ public class SignupActivity extends BaseActivity {
                 });
     }
 
-    private boolean isEditTextEmpty(EditText editText) {
-        //function for check edittext value
-        return TextUtils.isEmpty(editText.getText().toString());
-    }
-
     @Override
     protected void onStart() {
         super.onStart();

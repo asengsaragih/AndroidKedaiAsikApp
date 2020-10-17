@@ -28,4 +28,10 @@
 
     <string name="signout_dialog_title">Keluar?</string>
     <string name="signout_dialog_message">Akun anda akan dikeluarkan dari aplikasi</string>
+
+    <string name="store">Toko Sendiri</string>
+    <string name="register_store">Buat Kedai</string>
+    <string name="store_name">Nama Kedai</string>
+    <string name="opening_store">Jam Buka</string>
+    <string name="closing_store">Jam Tutup</string>
 </resources>

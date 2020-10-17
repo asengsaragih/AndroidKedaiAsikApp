@@ -1,19 +1,31 @@
 package com.suncode.kedaiasik;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.suncode.kedaiasik.base.BaseActivity;
+import com.suncode.kedaiasik.base.Constant;
+import com.suncode.kedaiasik.model.User;
 
 public class MainActivity extends BaseActivity {
+
+    private static final String TAG = "MainActivityTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +58,43 @@ public class MainActivity extends BaseActivity {
                 //open dialog signout
                 dialogSignOut();
                 break;
+            case R.id.action_store:
+                //check store
+                openStore();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openStore() {
+        DatabaseReference reference = mDatabase.getReference().child(Constant.USER).child(userID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //validate snapshot
+                if (!snapshot.exists())
+                    return;
+
+                //read snapshot value and retrieve into object
+                User user = snapshot.getValue(User.class);
+
+                //check object
+                if (user == null)
+                    return;
+
+                if (user.getStoreID() == null)
+                    startActivity(new Intent(getApplicationContext(), RegisterStoreActivity.class)); //intent to register store
+                else
+                    startActivity(new Intent(getApplicationContext(), StoreActivity.class).putExtra(Constant.INTENT_TO_STORE, user.getStoreID())); //intent to store
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "Error: " + error.getCode());
+                Log.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getDetails());
+            }
+        });
     }
 
     private void dialogSignOut() {

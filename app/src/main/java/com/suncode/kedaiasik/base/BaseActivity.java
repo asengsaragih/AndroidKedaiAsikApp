@@ -1,7 +1,8 @@
 package com.suncode.kedaiasik.base;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ public class BaseActivity extends AppCompatActivity {
     protected AppCompatActivity mActivity;
     protected FirebaseDatabase mDatabase;
     protected FirebaseAuth mAuth;
+    protected String userID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class BaseActivity extends AppCompatActivity {
         //firebase initalize
         mDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null)
+            userID = mAuth.getCurrentUser().getUid();
     }
 
     protected void toast(String message) {
@@ -37,5 +42,10 @@ public class BaseActivity extends AppCompatActivity {
         builder.setMessage(message);
 
         return builder;
+    }
+
+    protected boolean isEditTextEmpty(EditText editText) {
+        //function for check edittext value
+        return TextUtils.isEmpty(editText.getText().toString());
     }
 }

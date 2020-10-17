@@ -1,5 +1,7 @@
 package com.suncode.kedaiasik.model;
 
+import androidx.annotation.Nullable;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -9,6 +11,8 @@ public class User implements Serializable {
     private String name;
     private String phone;
     private String email;
+
+    @Nullable
     private String storeID;
 
     public User() {
@@ -33,6 +37,7 @@ public class User implements Serializable {
         return email;
     }
 
+    @Nullable
     public String getStoreID() {
         return storeID;
     }
