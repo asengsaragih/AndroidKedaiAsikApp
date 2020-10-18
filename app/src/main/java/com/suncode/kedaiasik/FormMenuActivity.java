@@ -42,7 +42,10 @@ public class FormMenuActivity extends BaseActivity {
 
     private static final String TAG = "FormMenuActivityTAG";
 
+    //pembuatan temp variable based 64 image untuk
+    //menggunggah gambar ke firebase realtime dalam format string
     private String mBase64ImageString = null;
+
     private EditText mNameEdittext;
     private CurrencyEditText mPriceEdittext;
     private RadioGroup mCategoryRadioGroup;
@@ -105,6 +108,8 @@ public class FormMenuActivity extends BaseActivity {
     }
 
     private void pickImageFromStorage() {
+        //fungdi untuk pemanggilan gambar yang berasal dari file manager
+        //dan fungsi ini juga udah termasuk dengan fungsi filemanager yang ada di samsung
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
         Intent samsungIntent = new Intent("com.sec.android.app.myfiles.PICK_DATA");
@@ -127,10 +132,13 @@ public class FormMenuActivity extends BaseActivity {
     }
 
     private FormMenu getFormMenuData() {
+        //data ini didapatkan dari ourstoreactivity ketika
+        //mau menambah data atau mau ngedit data
         return (FormMenu) getIntent().getSerializableExtra(Constant.INTENT_TO_FORM_MENU);
     }
 
     private void saveMenu() {
+        //fungsi untuk menambah atau memperbaruhi data
         if (isEditTextEmpty(mNameEdittext) || isEditTextEmpty(mPriceEdittext) || mBase64ImageString == null) {
             toast(getString(R.string.err_empty_form));
             return;
@@ -189,6 +197,7 @@ public class FormMenuActivity extends BaseActivity {
     }
 
     private void deleteMenu() {
+        //fungsi alert dialog ketika data ingin dihapus maka akan muncul dialog dulu
         AlertDialog.Builder builder = dialogBuilder("Hapus Menu", "Yakin ingin menghapus menu ini?");
         builder.setPositiveButton("Hapus", (dialog, which) -> {
             DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getFormMenuData().getStoreId()).child(Constant.MENU).child(getFormMenuData().getMenuId());

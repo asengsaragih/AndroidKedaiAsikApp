@@ -9,34 +9,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FormMenuActivity"
-            android:label="@string/menu_activity"
-            android:parentActivityName=".StoreActivity"
-            android:launchMode="singleTop">
-
-        </activity>
-        <activity
-            android:name=".RegisterStoreActivity"
-            android:label="@string/register_store"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".StoreActivity" />
-        <activity
-            android:name=".SigninActivity"
-            android:label="@string/signin" />
-        <activity
-            android:name=".SignupActivity"
-            android:label="@string/signup" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".TransactionActivity"></activity>
+        <activity android:name=".StoreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FormMenuActivity"
+            android:label="@string/menu_activity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".OurStoreActivity" />
+        <activity
+            android:name=".RegisterStoreActivity"
+            android:label="@string/register_store"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".OurStoreActivity" />
+        <activity
+            android:name=".SigninActivity"
+            android:label="@string/signin" />
+        <activity
+            android:name=".SignupActivity"
+            android:label="@string/signup" />
+        <activity android:name=".MainActivity"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

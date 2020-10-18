@@ -3,10 +3,8 @@ package com.suncode.kedaiasik;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +16,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.suncode.kedaiasik.adapter.StoreAdapter;
 import com.suncode.kedaiasik.base.BaseActivity;
@@ -94,8 +91,11 @@ public class MainActivity extends BaseActivity {
         DatabaseReference reference = mDatabase.getReference().child(Constant.STORE);
         reference.addChildEventListener(childEventListener);
 
-        mAdapter = new StoreAdapter(this, mData, mDataId, (id, store) -> {
+        mAdapter = new StoreAdapter(this, mData, mDataId, (idStore, store) -> {
+            Intent intent = new Intent(getApplicationContext(), StoreActivity.class);
+            intent.putExtra(Constant.INTENT_TO_ORDER_ID, idStore);
 
+            startActivity(intent);
         });
 
         mMainRecycleview.setAdapter(mAdapter);
@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity {
                 if (user.getStoreID() == null)
                     startActivity(new Intent(getApplicationContext(), RegisterStoreActivity.class)); //intent to register store
                 else
-                    startActivity(new Intent(getApplicationContext(), StoreActivity.class).putExtra(Constant.INTENT_TO_STORE, user.getStoreID())); //intent to store
+                    startActivity(new Intent(getApplicationContext(), OurStoreActivity.class).putExtra(Constant.INTENT_TO_STORE, user.getStoreID())); //intent to store
 
             }
 

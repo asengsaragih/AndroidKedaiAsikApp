@@ -46,4 +46,6 @@
     <string name="menu_image">Gambar Menu</string>
     <string name="save">Save Menu</string>
     <string name="delete">Delete menu</string>
+    <string name="total_order">Total \n</string>
+    <string name="total_first">Total \nRp 0</string>
 </resources>

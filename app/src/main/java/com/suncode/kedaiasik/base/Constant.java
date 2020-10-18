@@ -19,6 +19,11 @@ public class Constant {
     public static final int MENU_CATEGORY_FOOD = 1;
     public static final int MENU_CATEGORY_DRINK = 2;
 
+    public static final String INTENT_TO_ORDER_ID = "id_store";
+
+    public static final String INTENT_TO_TRANSACTION_HASHMAP = "intent_transaction_map";
+    public static final String INTENT_TO_TRANSACTION_TOTAL = "intent_transaction_total";
+
     //reques code permission
     public static final int REQUEST_PERMISSION_WRITE_STORAGE = 2;
     public static final int REQUEST_PERMISSION_READ_STORAGE = 3;

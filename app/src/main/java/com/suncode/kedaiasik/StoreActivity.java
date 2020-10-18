@@ -4,37 +4,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.suncode.kedaiasik.adapter.MenuAdapter;
+import com.suncode.kedaiasik.adapter.OrderAdapter;
 import com.suncode.kedaiasik.base.BaseActivity;
 import com.suncode.kedaiasik.base.Constant;
-import com.suncode.kedaiasik.model.FormMenu;
 import com.suncode.kedaiasik.model.Menu;
 import com.suncode.kedaiasik.model.Store;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class StoreActivity extends BaseActivity {
+    private static final String TAG = "StoreActivityTAG";
 
-    private static final String TAG = "StoreActivity";
-    private RecyclerView mMenuRecycleview;
-    private View mEmptyView;
-    private FloatingActionButton mAddMenuFab;
-    private List<Menu> mData;
+    private RecyclerView mStoreRecycleview;
+    private TextView mTotalTextview;
+    private Button mOrderButton;
+
+    private OrderAdapter mAdapter;
+
     private List<String> mDataId;
-    private MenuAdapter mAdapter;
+    private List<Menu> mData;
+
+    //dan inti variable temp untuk pengiriman seluruh menu yang di pesan ke transaction activiry
+    private List<String> mListMenuChoose;
+
+    //ini variable temp untuk pengiriman total ke transaction activiry
+    private Double mTotalOrder = 0.0;
 
     private ChildEventListener childEventListener = new ChildEventListener() {
         @Override
@@ -42,7 +51,6 @@ public class StoreActivity extends BaseActivity {
             mData.add(snapshot.getValue(Menu.class));
             mDataId.add(snapshot.getKey());
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -50,7 +58,6 @@ public class StoreActivity extends BaseActivity {
             int pos = mDataId.indexOf(snapshot.getKey());
             mData.set(pos, snapshot.getValue(Menu.class));
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -59,7 +66,6 @@ public class StoreActivity extends BaseActivity {
             mDataId.remove(pos);
             mData.remove(pos);
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -77,93 +83,62 @@ public class StoreActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
-        //store name
-        setTitleStore();
 
-        //initialize variable
-        mMenuRecycleview = findViewById(R.id.recycle_menu);
-        mMenuRecycleview.setLayoutManager(layoutManager);
-        mMenuRecycleview.addItemDecoration(itemDecoration);
+        mStoreRecycleview = findViewById(R.id.recycle_store);
+        mStoreRecycleview.setLayoutManager(layoutManager);
+        mStoreRecycleview.addItemDecoration(itemDecoration);
 
-        mEmptyView = findViewById(R.id.empty_view_menu);
-        mAddMenuFab = findViewById(R.id.fab_menu);
-        mAddMenuFab.setOnClickListener(v -> openForm());
+        mTotalTextview = findViewById(R.id.textView_total);
+        mOrderButton = findViewById(R.id.button_order);
 
-        mData = new ArrayList<>();
         mDataId = new ArrayList<>();
+        mData = new ArrayList<>();
+
+        //penampung list makanan atau minuman yang dipilih
+        mListMenuChoose = new ArrayList<>();
 
         setData();
+
+        //ketika button pesan sekarang di klik
+        mOrderButton.setOnClickListener(v -> orderMenu());
+    }
+
+    private void orderMenu() {
+        //validasi dulu, jika yang dipesan kosong batalkan fungsi
+        if (mListMenuChoose.size() == 0) {
+            toast("Pilih salah satu makanan atau minuman");
+            return;
+        }
+
+        // nah kan disini seluruh orderan yang diambil masuk kedalam list
+        // dari list yang duplicate itu dihitung dulu yang kembar ada berapa
+        // setelah dihitung langsung dimasukkan kedalam hashmap
+        // karena firebase realtime support hashmap, maka dari itu pakai hashmap
+
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        for (String idMenu : mListMenuChoose) {
+            hashMap.put(idMenu, Collections.frequency(mListMenuChoose, idMenu));
+        }
+
+        Intent intent = new Intent(this, TransactionActivity.class);
+        intent.putExtra(Constant.INTENT_TO_TRANSACTION_HASHMAP, hashMap);
+        intent.putExtra(Constant.INTENT_TO_TRANSACTION_TOTAL, mTotalOrder);
+        startActivity(intent);
     }
 
     private void setData() {
-        DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getStoreID()).child(Constant.MENU);
+        DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getStoreId()).child(Constant.MENU);
         reference.addChildEventListener(childEventListener);
 
-        mAdapter = new MenuAdapter(this, mData, mDataId, mEmptyView, (id, menu) -> {
-            Intent intent = new Intent(this, FormMenuActivity.class);
-            //ngirim object form menu ke frommenuactivity
-            FormMenu formMenu = new FormMenu(getStoreID(), id);
-
-            intent.putExtra(Constant.INTENT_TO_FORM_MENU, formMenu);
-            startActivity(intent);
-
+        mAdapter = new OrderAdapter(getApplicationContext(), mData, mDataId, mTotalTextview, mListMenuChoose, total -> {
+            mTotalOrder = total;
         });
 
-        mMenuRecycleview.setAdapter(mAdapter);
-        mAdapter.updateEmptyView();
+        mStoreRecycleview.setAdapter(mAdapter);
     }
 
-    private void openForm() {
-        if (isReadStroragePermissionGranted()) {
-            Intent intent = new Intent(this, FormMenuActivity.class);
-            //ngirim object form menu ke frommenuactivity
-            FormMenu formMenu = new FormMenu(getStoreID(), null);
-
-            intent.putExtra(Constant.INTENT_TO_FORM_MENU, formMenu);
-            startActivity(intent);
-        } else {
-            getPermissionReadStorage();
-        }
-    }
-
-    private void setTitleStore() {
-        DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getStoreID());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //validate snapshoot
-                if (!snapshot.exists())
-                    return;
-
-                //insert into object
-                Store store = snapshot.getValue(Store.class);
-
-                //check store
-                if (store == null)
-                    return;
-
-                //set title
-                setTitle(store.getName());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(TAG, "onCancelled: ", error.toException());
-            }
-        });
-    }
-
-    private String getStoreID() {
-        return getIntent().getStringExtra(Constant.INTENT_TO_STORE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
+    private String getStoreId() {
+        return getIntent().getStringExtra(Constant.INTENT_TO_ORDER_ID);
     }
 }
