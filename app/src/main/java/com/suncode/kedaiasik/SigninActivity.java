@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.suncode.kedaiasik.base.BaseActivity;
 import com.suncode.kedaiasik.base.Constant;
 
+import java.util.Objects;
+
 public class SigninActivity extends BaseActivity {
 
     private static final String TAG = "SigninActivity";
@@ -29,6 +31,8 @@ public class SigninActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        //hide action bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         mEmailEdittext = findViewById(R.id.editText_signin_email);
         mPasswordEdittext = findViewById(R.id.editText_signin_password);

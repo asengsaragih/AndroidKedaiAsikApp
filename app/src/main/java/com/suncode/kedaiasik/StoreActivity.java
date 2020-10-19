@@ -83,10 +83,10 @@ public class StoreActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+        setTitleStore();
 
         mStoreRecycleview = findViewById(R.id.recycle_store);
         mStoreRecycleview.setLayoutManager(layoutManager);
-        mStoreRecycleview.addItemDecoration(itemDecoration);
 
         mTotalTextview = findViewById(R.id.textView_total);
         mOrderButton = findViewById(R.id.button_order);
@@ -140,5 +140,32 @@ public class StoreActivity extends BaseActivity {
 
     private String getStoreId() {
         return getIntent().getStringExtra(Constant.INTENT_TO_ORDER_ID);
+    }
+
+    private void setTitleStore() {
+        DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getStoreId());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //validate snapshoot
+                if (!snapshot.exists())
+                    return;
+
+                //insert into object
+                Store store = snapshot.getValue(Store.class);
+
+                //check store
+                if (store == null)
+                    return;
+
+                //set title
+                setTitle(store.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "onCancelled: ", error.toException());
+            }
+        });
     }
 }

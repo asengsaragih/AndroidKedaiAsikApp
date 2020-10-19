@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kedai Asik</string>
-    <string name="signin">Masuk Kedai Asik</string>
-    <string name="signup">Daftar Kedai Asik</string>
+    <string name="signin">Masuk \nKedai Asik</string>
+    <string name="signup">Daftar \nKedai Asik</string>
     <string name="signout">Keluar</string>
     <string name="cancle">Batal</string>
 
@@ -48,4 +48,5 @@
     <string name="delete">Delete menu</string>
     <string name="total_order">Total \n</string>
     <string name="total_first">Total \nRp 0</string>
+    <string name="pesan_sekarang">Pesan Sekarang</string>
 </resources>

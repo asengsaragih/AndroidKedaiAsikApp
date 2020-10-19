@@ -3,6 +3,7 @@ package com.suncode.kedaiasik;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -81,7 +82,6 @@ public class MainActivity extends BaseActivity {
         //recycle view initalize
         mMainRecycleview = findViewById(R.id.recycle_main);
         mMainRecycleview.setLayoutManager(layoutManager);
-        mMainRecycleview.addItemDecoration(itemDecoration);
 
         //set data
         setData();

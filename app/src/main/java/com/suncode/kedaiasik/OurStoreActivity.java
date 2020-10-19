@@ -30,7 +30,6 @@ public class OurStoreActivity extends BaseActivity {
 
     private static final String TAG = "StoreActivity";
     private RecyclerView mMenuRecycleview;
-    private View mEmptyView;
     private FloatingActionButton mAddMenuFab;
     private List<Menu> mData;
     private List<String> mDataId;
@@ -42,7 +41,6 @@ public class OurStoreActivity extends BaseActivity {
             mData.add(snapshot.getValue(Menu.class));
             mDataId.add(snapshot.getKey());
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -50,7 +48,6 @@ public class OurStoreActivity extends BaseActivity {
             int pos = mDataId.indexOf(snapshot.getKey());
             mData.set(pos, snapshot.getValue(Menu.class));
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -59,7 +56,6 @@ public class OurStoreActivity extends BaseActivity {
             mDataId.remove(pos);
             mData.remove(pos);
             mAdapter.notifyDataSetChanged();
-            mAdapter.updateEmptyView();
         }
 
         @Override
@@ -83,9 +79,7 @@ public class OurStoreActivity extends BaseActivity {
         //initialize variable
         mMenuRecycleview = findViewById(R.id.recycle_menu);
         mMenuRecycleview.setLayoutManager(layoutManager);
-        mMenuRecycleview.addItemDecoration(itemDecoration);
 
-        mEmptyView = findViewById(R.id.empty_view_menu);
         mAddMenuFab = findViewById(R.id.fab_menu);
         mAddMenuFab.setOnClickListener(v -> openForm());
 
@@ -99,7 +93,7 @@ public class OurStoreActivity extends BaseActivity {
         DatabaseReference reference = mDatabase.getReference().child(Constant.STORE).child(getStoreID()).child(Constant.MENU);
         reference.addChildEventListener(childEventListener);
 
-        mAdapter = new MenuAdapter(this, mData, mDataId, mEmptyView, (id, menu) -> {
+        mAdapter = new MenuAdapter(this, mData, mDataId, (id, menu) -> {
             Intent intent = new Intent(this, FormMenuActivity.class);
             //ngirim object form menu ke frommenuactivity
             FormMenu formMenu = new FormMenu(getStoreID(), id);
@@ -110,7 +104,6 @@ public class OurStoreActivity extends BaseActivity {
         });
 
         mMenuRecycleview.setAdapter(mAdapter);
-        mAdapter.updateEmptyView();
     }
 
     private void openForm() {

@@ -31,6 +31,8 @@ public class SignupActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        //hide action bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         mNameEdittext = findViewById(R.id.editText_signup_name);
         mPhoneEdittext = findViewById(R.id.editText_signup_phone);

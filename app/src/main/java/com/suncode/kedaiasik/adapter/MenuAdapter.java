@@ -24,14 +24,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
     private Context mContext;
     private List<Menu> mData;
     private List<String> mDataId;
-    private View mEmptyView;
     private ClickHandler mHandler;
 
-    public MenuAdapter(Context mContext, List<Menu> mData, List<String> mDataId, View mEmptyView, ClickHandler mHandler) {
+    public MenuAdapter(Context mContext, List<Menu> mData, List<String> mDataId, ClickHandler mHandler) {
         this.mContext = mContext;
         this.mData = mData;
         this.mDataId = mDataId;
-        this.mEmptyView = mEmptyView;
         this.mHandler = mHandler;
     }
 
@@ -57,13 +55,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
     @Override
     public int getItemCount() {
         return mData.size();
-    }
-
-    public void updateEmptyView() {
-        if (mData.size() > 0)
-            mEmptyView.setVisibility(View.VISIBLE);
-        else
-            mEmptyView.setVisibility(View.GONE);
     }
 
     private static Bitmap decodeBase64(String imageBased64) {

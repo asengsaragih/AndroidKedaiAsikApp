@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".SignupActivity">
 
         <Button
             android:id="@+id/button_signup"
+            style="@style/buttonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -25,9 +28,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="Ganteng00!@#"
+            android:text="ganteng00"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_signup_password_title" />
@@ -38,9 +43,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="aldiwahyu.saragih@gmail.com"
+            android:text="fiqrychoerudin48@gmail.com"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_signup_email_title" />
@@ -51,9 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Aldi Wahyu Saragih"
+            android:text="Fiqry Choerudin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_signup_name_title" />
@@ -64,9 +73,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:inputType="phone"
-            android:text="082165607625"
+            android:text="081254845698"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_signup_phone_title" />
@@ -77,12 +88,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="Ganteng00!@#"
+            android:text="ganteng00"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_signup_repassword_title" />
+
+        <ImageView
+            android:id="@+id/imageView_background_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_signup_password_title"
@@ -132,8 +153,9 @@
             android:layout_marginEnd="8dp"
             android:text="@string/name"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView_background_signup" />
 
         <TextView
             android:id="@+id/textView_signup_phone_title"
@@ -158,6 +180,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_signup_password" />
+
+        <TextView
+            android:id="@+id/textView_title_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/signup"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
