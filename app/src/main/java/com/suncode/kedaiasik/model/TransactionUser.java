@@ -6,6 +6,7 @@ public class TransactionUser {
     private String storeId;
     private HashMap<String, Integer> listMenu;
     private Double total;
+    private long timestamp;
 
     public TransactionUser() {
     }
@@ -14,6 +15,7 @@ public class TransactionUser {
         this.storeId = storeId;
         this.listMenu = listMenu;
         this.total = total;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public String getStoreId() {
@@ -26,5 +28,9 @@ public class TransactionUser {
 
     public Double getTotal() {
         return total;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 }

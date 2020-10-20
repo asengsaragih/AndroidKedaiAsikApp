@@ -3,6 +3,7 @@ package com.suncode.kedaiasik;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -158,5 +159,20 @@ public class OurStoreActivity extends BaseActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.store_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_history) {
+            startActivity(new Intent(getApplicationContext(), HistoryActivity.class).putExtra(Constant.INTENT_TO_HISTORY, getStoreID()));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

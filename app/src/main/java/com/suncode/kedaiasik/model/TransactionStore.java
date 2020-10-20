@@ -7,6 +7,7 @@ public class TransactionStore {
     private String address;
     private HashMap<String, Integer> listMenu;
     private Double total;
+    private long timestamp;
 
     public TransactionStore() {
     }
@@ -16,6 +17,7 @@ public class TransactionStore {
         this.address = address;
         this.listMenu = listMenu;
         this.total = total;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public String getUserId() {
@@ -28,5 +30,13 @@ public class TransactionStore {
 
     public Double getTotal() {
         return total;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 }

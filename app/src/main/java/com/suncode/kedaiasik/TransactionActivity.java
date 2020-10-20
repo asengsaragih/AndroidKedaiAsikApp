@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.suncode.kedaiasik.model.Menu;
 import com.suncode.kedaiasik.model.Store;
 import com.suncode.kedaiasik.model.TransactionStore;
 import com.suncode.kedaiasik.model.TransactionUser;
+import com.suncode.kedaiasik.model.User;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -130,7 +133,63 @@ public class TransactionActivity extends BaseActivity {
         storeTransactionPush.child(keyPushStoreTransaction).setValue(store);
 
         toast("Berhasil Mengorder Data");
+
+        //send message to user
+        getStoreData();
+
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
+    }
+
+    private void getStoreData() {
+        DatabaseReference ref = mDatabase.getReference().child(Constant.STORE).child(getIntentData().getStoreId());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Store store = snapshot.getValue(Store.class);
+
+                getUserStoreData(store);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getUserStoreData(Store store) {
+        DatabaseReference reference = mDatabase.getReference().child(Constant.USER).child(store.getUserId());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                sendMessage(user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void sendMessage(User user) {
+        String message = "Saya memesan beberapa menu. dikirim ke alamat : " + mAddressEdittext.getText().toString()
+                + ". Dengan metode pembayaran " + getPayment() + ". Terima kasih";
+
+        Uri uri = Uri.parse("smsto:" + user.getPhone());
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra("sms_body", message);
+        startActivity(intent);
+    }
+
+    private String getPayment() {
+        if (mCodRadioButton.isChecked())
+            return mCodRadioButton.getText().toString();
+        else
+            return mTransferRadioButton.getText().toString();
     }
 
     private List<String> menuChooseList() {

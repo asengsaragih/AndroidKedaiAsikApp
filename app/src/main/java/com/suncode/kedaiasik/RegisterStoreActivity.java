@@ -57,7 +57,7 @@ public class RegisterStoreActivity extends BaseActivity {
         DatabaseReference reference = mDatabase.getReference().child(Constant.STORE);
         String storeID = reference.push().getKey();
 
-        Store store = new Store(name, open, close);
+        Store store = new Store(name, open, close, mAuth.getUid());
 
         reference.child(storeID).setValue(store)
                 .addOnCompleteListener(task -> {

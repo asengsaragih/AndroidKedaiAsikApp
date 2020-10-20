@@ -10,15 +10,17 @@ public class Store implements Serializable {
     private String open;
     private String close;
     private Menu menu;
+    private String userId;
 
     public Store() {
     }
 
-    public Store(String name, String open, String close) {
+    public Store(String name, String open, String close, String uid) {
         this.name = name;
         this.open = open;
         this.close = close;
         this.menu = null;
+        this.userId = uid;
     }
 
     public String getName() {
@@ -35,5 +37,9 @@ public class Store implements Serializable {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

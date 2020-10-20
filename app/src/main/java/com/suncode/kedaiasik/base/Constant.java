@@ -15,6 +15,7 @@ public class Constant {
     public static final String STORE_ID = "storeID";
     public static final String INTENT_TO_STORE = "intent_store_id_to_store_activity";
     public static final String INTENT_TO_FORM_MENU = "intent_store_id_to_form_menu";
+    public static final String INTENT_TO_HISTORY = "intent_store_id_to_history";
 
     //kategori makanan dan minuman
     public static final int MENU_CATEGORY_FOOD = 1;
