@@ -137,7 +137,7 @@ public class TransactionActivity extends BaseActivity {
         //send message to user
         getStoreData();
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
 
