@@ -11,6 +11,7 @@ public class Constant {
     public static final String USER = "User";
     public static final String STORE = "Store";
     public static final String MENU = "Menu";
+    public static final String TRANSACTION = "Transaction";
     public static final String STORE_ID = "storeID";
     public static final String INTENT_TO_STORE = "intent_store_id_to_store_activity";
     public static final String INTENT_TO_FORM_MENU = "intent_store_id_to_form_menu";
@@ -21,6 +22,7 @@ public class Constant {
 
     public static final String INTENT_TO_ORDER_ID = "id_store";
 
+    public static final String INTENT_TO_TRANSACTION_ID_STORE = "intent_transaction_id";
     public static final String INTENT_TO_TRANSACTION_HASHMAP = "intent_transaction_map";
     public static final String INTENT_TO_TRANSACTION_TOTAL = "intent_transaction_total";
 

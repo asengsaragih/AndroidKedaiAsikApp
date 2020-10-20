@@ -49,4 +49,13 @@
     <string name="total_order">Total \n</string>
     <string name="total_first">Total \nRp 0</string>
     <string name="pesan_sekarang">Pesan Sekarang</string>
+    <string name="alamat_rumah">Alamat Rumah</string>
+    <string name="total">Total :</string>
+    <string name="ongkir">Ongkos Kirim : Rp 5.000</string>
+    <string name="subtotal">Subtotal :</string>
+    <string name="payment_gateway">Metode Pembayaran</string>
+    <string name="transfer">Transfer via Bank</string>
+    <string name="cod">Bayar ditempat</string>
+    <string name="address_hint">Jalan Buahbatu Gg PGA Bandung</string>
+    <string name="order_now">Pesan Sekarang</string>
 </resources>

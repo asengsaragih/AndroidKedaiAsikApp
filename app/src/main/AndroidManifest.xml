@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionActivity"></activity>
+        <activity android:name=".TransactionActivity"
+            android:label="Detail Order"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".StoreActivity">
 
         </activity>

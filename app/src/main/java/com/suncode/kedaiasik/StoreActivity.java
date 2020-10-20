@@ -123,6 +123,7 @@ public class StoreActivity extends BaseActivity {
 
         Intent intent = new Intent(this, TransactionActivity.class);
         intent.putExtra(Constant.INTENT_TO_TRANSACTION_HASHMAP, hashMap);
+        intent.putExtra(Constant.INTENT_TO_TRANSACTION_ID_STORE, getStoreId());
         intent.putExtra(Constant.INTENT_TO_TRANSACTION_TOTAL, mTotalOrder);
         startActivity(intent);
     }

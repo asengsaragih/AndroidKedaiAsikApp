@@ -42,6 +42,9 @@
                 android:id="@+id/button_list_item_order_add"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
                 android:text="+" />
 
             <TextView
@@ -49,12 +52,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:padding="4dp"
+                android:textStyle="bold"
                 android:text="0" />
 
             <Button
                 android:id="@+id/button_list_item_order_less"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
                 android:text="-" />
 
         </LinearLayout>
@@ -79,6 +87,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Nasi Putih + Jus Mangga"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toEndOf="@+id/imageView_list_item_order_image"
